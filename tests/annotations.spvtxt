@@ -1,0 +1,73 @@
+; SPIR-V
+; Version: 1.0
+; Generator: Khronos LLVM/SPIR-V Translator; 14
+; Bound: 32
+; Schema: 0
+               OpCapability Addresses ; 0x00000014
+               OpCapability Linkage ; 0x0000001c
+               OpCapability Kernel ; 0x00000024
+               OpCapability Int64 ; 0x0000002c
+          %1 = OpExtInstImport "OpenCL.std" ; 0x00000034
+               OpMemoryModel Physical64 OpenCL ; 0x00000048
+               OpEntryPoint Kernel %10 "test_wgsize_reqd" ; 0x00000054
+               OpEntryPoint Kernel %17 "test_wgsize_hint" ; 0x00000074
+               OpEntryPoint Kernel %23 "test_vectype_hint" ; 0x00000094
+               OpExecutionMode %10 LocalSize 16 8 2 ; 0x000000b4
+               OpExecutionMode %17 LocalSizeHint 8 4 2 ; 0x000000cc
+               OpExecutionMode %23 VecTypeHint 262146 ; 0x000000e4
+         %29 = OpString "kernel_arg_type.test_wgsize_reqd.int*," ; 0x000000f4
+         %30 = OpString "kernel_arg_type.test_wgsize_hint.int*," ; 0x00000124
+         %31 = OpString "kernel_arg_type.test_vectype_hint.int*," ; 0x00000154
+               OpSource OpenCL_C 102000 ; 0x00000184
+               OpName %5 "__spirv_BuiltInGlobalInvocationId" ; 0x00000190
+               OpName %11 "dst" ; 0x000001bc
+               OpName %12 "entry" ; 0x000001c8
+               OpName %14 "call" ; 0x000001d8
+               OpName %15 "arrayidx" ; 0x000001e8
+               OpName %18 "dst" ; 0x000001fc
+               OpName %19 "entry" ; 0x00000208
+               OpName %21 "call" ; 0x00000218
+               OpName %22 "arrayidx" ; 0x00000228
+               OpName %24 "dst" ; 0x0000023c
+               OpName %25 "entry" ; 0x00000248
+               OpName %27 "call" ; 0x00000258
+               OpName %28 "arrayidx" ; 0x00000268
+               OpDecorate %5 BuiltIn GlobalInvocationId ; 0x0000027c
+               OpDecorate %5 Constant ; 0x0000028c
+               OpDecorate %5 LinkageAttributes "__spirv_BuiltInGlobalInvocationId" Import ; 0x00000298
+          %2 = OpTypeInt 64 0 ; 0x000002cc
+          %7 = OpTypeInt 32 0 ; 0x000002dc
+         %16 = OpConstant %7 0 ; 0x000002ec
+          %3 = OpTypeVector %2 3 ; 0x000002fc
+          %4 = OpTypePointer UniformConstant %3 ; 0x0000030c
+          %6 = OpTypeVoid ; 0x0000031c
+          %8 = OpTypePointer CrossWorkgroup %7 ; 0x00000324
+          %9 = OpTypeFunction %6 %8 ; 0x00000334
+          %5 = OpVariable %4 UniformConstant ; 0x00000344
+         %10 = OpFunction %6 None %9 ; 0x00000354
+         %11 = OpFunctionParameter %8 ; 0x00000368
+         %12 = OpLabel ; 0x00000374
+         %13 = OpLoad %3 %5 ; 0x0000037c
+         %14 = OpCompositeExtract %2 %13 0 ; 0x0000038c
+         %15 = OpInBoundsPtrAccessChain %8 %11 %14 ; 0x000003a0
+               OpStore %15 %16 Aligned 4 ; 0x000003b4
+               OpReturn ; 0x000003c8
+               OpFunctionEnd ; 0x000003cc
+         %17 = OpFunction %6 None %9 ; 0x000003d0
+         %18 = OpFunctionParameter %8 ; 0x000003e4
+         %19 = OpLabel ; 0x000003f0
+         %20 = OpLoad %3 %5 ; 0x000003f8
+         %21 = OpCompositeExtract %2 %20 0 ; 0x00000408
+         %22 = OpInBoundsPtrAccessChain %8 %18 %21 ; 0x0000041c
+               OpStore %22 %16 Aligned 4 ; 0x00000430
+               OpReturn ; 0x00000444
+               OpFunctionEnd ; 0x00000448
+         %23 = OpFunction %6 None %9 ; 0x0000044c
+         %24 = OpFunctionParameter %8 ; 0x00000460
+         %25 = OpLabel ; 0x0000046c
+         %26 = OpLoad %3 %5 ; 0x00000474
+         %27 = OpCompositeExtract %2 %26 0 ; 0x00000484
+         %28 = OpInBoundsPtrAccessChain %8 %24 %27 ; 0x00000498
+               OpStore %28 %16 Aligned 4 ; 0x000004ac
+               OpReturn ; 0x000004c0
+               OpFunctionEnd ; 0x000004c4

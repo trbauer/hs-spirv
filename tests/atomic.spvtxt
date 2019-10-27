@@ -1,0 +1,100 @@
+; SPIR-V
+; Version: 1.0
+; Generator: Khronos LLVM/SPIR-V Translator; 14
+; Bound: 49
+; Schema: 0
+               OpCapability Addresses ; 0x00000014
+               OpCapability Linkage ; 0x0000001c
+               OpCapability Kernel ; 0x00000024
+               OpCapability Int64 ; 0x0000002c
+          %1 = OpExtInstImport "OpenCL.std" ; 0x00000034
+               OpMemoryModel Physical64 OpenCL ; 0x00000048
+               OpEntryPoint Kernel %11 "chain_atomics" ; 0x00000054
+         %46 = OpString "kernel_arg_type.chain_atomics.int*," ; 0x00000070
+               OpSource OpenCL_C 102000 ; 0x0000009c
+               OpName %5 "__spirv_BuiltInGlobalInvocationId" ; 0x000000a8
+               OpName %6 "__spirv_BuiltInGlobalSize" ; 0x000000d4
+               OpName %12 "dst" ; 0x000000f8
+               OpName %13 "entry" ; 0x00000104
+               OpName %15 "call" ; 0x00000114
+               OpName %16 "conv" ; 0x00000124
+               OpName %17 "conv1" ; 0x00000134
+               OpName %19 "call2" ; 0x00000144
+               OpName %20 "rem" ; 0x00000154
+               OpName %21 "add.ptr" ; 0x00000160
+               OpName %22 "call3" ; 0x00000170
+               OpName %25 "add" ; 0x00000180
+               OpName %26 "conv4" ; 0x0000018c
+               OpName %28 "call5" ; 0x0000019c
+               OpName %29 "rem6" ; 0x000001ac
+               OpName %30 "add.ptr7" ; 0x000001bc
+               OpName %31 "call8" ; 0x000001d0
+               OpName %32 "add9" ; 0x000001e0
+               OpName %33 "conv10" ; 0x000001f0
+               OpName %35 "call11" ; 0x00000200
+               OpName %36 "rem12" ; 0x00000210
+               OpName %37 "add.ptr13" ; 0x00000220
+               OpName %38 "call14" ; 0x00000234
+               OpName %39 "add15" ; 0x00000244
+               OpName %40 "conv16" ; 0x00000254
+               OpName %42 "call17" ; 0x00000264
+               OpName %43 "rem18" ; 0x00000274
+               OpName %44 "add.ptr19" ; 0x00000284
+               OpName %45 "call20" ; 0x00000298
+               OpDecorate %47 Constant ; 0x000002a8
+         %47 = OpDecorationGroup ; 0x000002b4
+               OpDecorate %48 NoSignedWrap ; 0x000002bc
+         %48 = OpDecorationGroup ; 0x000002c8
+               OpDecorate %5 BuiltIn GlobalInvocationId ; 0x000002d0
+               OpDecorate %6 BuiltIn GlobalSize ; 0x000002e0
+               OpDecorate %12 Volatile ; 0x000002f0
+               OpDecorate %6 LinkageAttributes "__spirv_BuiltInGlobalSize" Import ; 0x000002fc
+               OpDecorate %5 LinkageAttributes "__spirv_BuiltInGlobalInvocationId" Import ; 0x00000328
+               OpGroupDecorate %47 %5 %6 ; 0x0000035c
+               OpGroupDecorate %48 %25 %32 %39 ; 0x0000036c
+          %2 = OpTypeInt 64 0 ; 0x00000380
+          %8 = OpTypeInt 32 0 ; 0x00000390
+         %23 = OpConstant %8 1 ; 0x000003a0
+         %24 = OpConstant %8 16 ; 0x000003b0
+          %3 = OpTypeVector %2 3 ; 0x000003c0
+          %4 = OpTypePointer UniformConstant %3 ; 0x000003d0
+          %7 = OpTypeVoid ; 0x000003e0
+          %9 = OpTypePointer CrossWorkgroup %8 ; 0x000003e8
+         %10 = OpTypeFunction %7 %9 ; 0x000003f8
+          %5 = OpVariable %4 UniformConstant ; 0x00000408
+          %6 = OpVariable %4 UniformConstant ; 0x00000418
+         %11 = OpFunction %7 None %10 ; 0x00000428
+         %12 = OpFunctionParameter %9 ; 0x0000043c
+         %13 = OpLabel ; 0x00000448
+         %14 = OpLoad %3 %5 ; 0x00000450
+         %15 = OpCompositeExtract %2 %14 0 ; 0x00000460
+         %16 = OpUConvert %8 %15 ; 0x00000474
+         %17 = OpSConvert %2 %16 ; 0x00000484
+         %18 = OpLoad %3 %6 ; 0x00000494
+         %19 = OpCompositeExtract %2 %18 0 ; 0x000004a4
+         %20 = OpUMod %2 %17 %19 ; 0x000004b8
+         %21 = OpInBoundsPtrAccessChain %9 %12 %20 ; 0x000004cc
+         %22 = OpAtomicIAdd %8 %21 %23 %24 %16 ; 0x000004e0
+         %25 = OpIAdd %8 %16 %22 ; 0x000004fc
+         %26 = OpSConvert %2 %25 ; 0x00000510
+         %27 = OpLoad %3 %6 ; 0x00000520
+         %28 = OpCompositeExtract %2 %27 0 ; 0x00000530
+         %29 = OpUMod %2 %26 %28 ; 0x00000544
+         %30 = OpInBoundsPtrAccessChain %9 %12 %29 ; 0x00000558
+         %31 = OpAtomicIAdd %8 %30 %23 %24 %16 ; 0x0000056c
+         %32 = OpIAdd %8 %25 %31 ; 0x00000588
+         %33 = OpSConvert %2 %32 ; 0x0000059c
+         %34 = OpLoad %3 %6 ; 0x000005ac
+         %35 = OpCompositeExtract %2 %34 0 ; 0x000005bc
+         %36 = OpUMod %2 %33 %35 ; 0x000005d0
+         %37 = OpInBoundsPtrAccessChain %9 %12 %36 ; 0x000005e4
+         %38 = OpAtomicSMin %8 %37 %23 %24 %16 ; 0x000005f8
+         %39 = OpIAdd %8 %32 %38 ; 0x00000614
+         %40 = OpSConvert %2 %39 ; 0x00000628
+         %41 = OpLoad %3 %6 ; 0x00000638
+         %42 = OpCompositeExtract %2 %41 0 ; 0x00000648
+         %43 = OpUMod %2 %40 %42 ; 0x0000065c
+         %44 = OpInBoundsPtrAccessChain %9 %12 %43 ; 0x00000670
+         %45 = OpAtomicIAdd %8 %44 %23 %24 %16 ; 0x00000684
+               OpReturn ; 0x000006a0
+               OpFunctionEnd ; 0x000006a4

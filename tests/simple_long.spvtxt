@@ -1,0 +1,86 @@
+; SPIR-V
+; Version: 1.0
+; Generator: Khronos LLVM/SPIR-V Translator; 14
+; Bound: 47
+; Schema: 0
+               OpCapability Addresses ; 0x00000014
+               OpCapability Linkage ; 0x0000001c
+               OpCapability Kernel ; 0x00000024
+               OpCapability Int64 ; 0x0000002c
+               OpCapability Int8 ; 0x00000034
+          %1 = OpExtInstImport "OpenCL.std" ; 0x0000003c
+               OpMemoryModel Physical64 OpenCL ; 0x00000050
+               OpEntryPoint Kernel %18 "test_long" ; 0x0000005c
+         %44 = OpString "kernel_arg_type.test_long.long*," ; 0x00000074
+               OpSource OpenCL_C 102000 ; 0x000000a0
+               OpName %11 "__const.test_long.pvt" ; 0x000000ac
+               OpName %14 "__spirv_BuiltInGlobalInvocationId" ; 0x000000cc
+               OpName %19 "dst" ; 0x000000f8
+               OpName %20 "entry" ; 0x00000104
+               OpName %22 "pvt" ; 0x00000114
+               OpName %31 "call" ; 0x00000120
+               OpName %33 "conv" ; 0x00000130
+               OpName %34 "conv1" ; 0x00000140
+               OpName %35 "rem" ; 0x00000150
+               OpName %38 "arrayidx" ; 0x0000015c
+               OpName %40 "add" ; 0x00000170
+               OpName %41 "idxprom" ; 0x0000017c
+               OpName %42 "arrayidx2" ; 0x0000018c
+               OpDecorate %45 Constant ; 0x000001a0
+         %45 = OpDecorationGroup ; 0x000001ac
+               OpDecorate %46 Alignment 8 ; 0x000001b4
+         %46 = OpDecorationGroup ; 0x000001c4
+               OpDecorate %14 BuiltIn GlobalInvocationId ; 0x000001cc
+               OpDecorate %19 Volatile ; 0x000001dc
+               OpDecorate %14 LinkageAttributes "__spirv_BuiltInGlobalInvocationId" Import ; 0x000001e8
+               OpDecorate %40 NoSignedWrap ; 0x0000021c
+               OpGroupDecorate %45 %11 %14 ; 0x00000228
+               OpGroupDecorate %46 %11 %22 ; 0x00000238
+          %2 = OpTypeInt 64 0 ; 0x00000248
+         %23 = OpTypeInt 8 0 ; 0x00000258
+         %32 = OpTypeInt 32 0 ; 0x00000268
+          %3 = OpConstant %2 18446744073709551615 ; 0x00000278
+          %4 = OpConstant %2 18446744073709551614 ; 0x0000028c
+          %5 = OpConstant %2 18446744073709551613 ; 0x000002a0
+          %6 = OpConstant %2 18446744073709551612 ; 0x000002b4
+          %7 = OpConstant %2 4 ; 0x000002c8
+         %29 = OpConstant %2 32 ; 0x000002dc
+         %36 = OpConstant %2 0 ; 0x000002f0
+          %8 = OpTypeArray %2 %7 ; 0x00000304
+         %10 = OpTypePointer UniformConstant %8 ; 0x00000314
+         %12 = OpTypeVector %2 3 ; 0x00000324
+         %13 = OpTypePointer UniformConstant %12 ; 0x00000334
+         %15 = OpTypeVoid ; 0x00000344
+         %16 = OpTypePointer CrossWorkgroup %2 ; 0x0000034c
+         %17 = OpTypeFunction %15 %16 ; 0x0000035c
+         %21 = OpTypePointer Function %8 ; 0x0000036c
+         %24 = OpTypePointer Function %23 ; 0x0000037c
+         %27 = OpTypePointer UniformConstant %23 ; 0x0000038c
+         %37 = OpTypePointer Function %2 ; 0x0000039c
+          %9 = OpConstantComposite %8 %3 %4 %5 %6 ; 0x000003ac
+         %11 = OpVariable %10 UniformConstant %9 ; 0x000003c8
+         %14 = OpVariable %13 UniformConstant ; 0x000003dc
+         %18 = OpFunction %15 None %17 ; 0x000003ec
+         %19 = OpFunctionParameter %16 ; 0x00000400
+         %20 = OpLabel ; 0x0000040c
+         %22 = OpVariable %21 Function ; 0x00000414
+         %25 = OpBitcast %24 %22 ; 0x00000424
+               OpLifetimeStart %25 32 ; 0x00000434
+         %26 = OpBitcast %24 %22 ; 0x00000440
+         %28 = OpBitcast %27 %11 ; 0x00000450
+               OpCopyMemorySized %26 %28 %29 Aligned 8 ; 0x00000460
+         %30 = OpLoad %12 %14 ; 0x00000478
+         %31 = OpCompositeExtract %2 %30 0 ; 0x00000488
+         %33 = OpUConvert %32 %31 ; 0x0000049c
+         %34 = OpSConvert %2 %33 ; 0x000004ac
+         %35 = OpUMod %2 %34 %7 ; 0x000004bc
+         %38 = OpInBoundsPtrAccessChain %37 %22 %36 %35 ; 0x000004d0
+         %39 = OpLoad %2 %38 Aligned 8 ; 0x000004e8
+         %40 = OpIAdd %2 %4 %39 ; 0x00000500
+         %41 = OpSConvert %2 %33 ; 0x00000514
+         %42 = OpInBoundsPtrAccessChain %16 %19 %41 ; 0x00000524
+               OpStore %42 %40 Volatile|Aligned 8 ; 0x00000538
+         %43 = OpBitcast %24 %22 ; 0x0000054c
+               OpLifetimeStop %43 32 ; 0x0000055c
+               OpReturn ; 0x00000568
+               OpFunctionEnd ; 0x0000056c

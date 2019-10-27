@@ -1,0 +1,136 @@
+; SPIR-V
+; Version: 1.0
+; Generator: Khronos LLVM/SPIR-V Translator; 14
+; Bound: 73
+; Schema: 0
+               OpCapability Addresses ; 0x00000014
+               OpCapability Linkage ; 0x0000001c
+               OpCapability Kernel ; 0x00000024
+               OpCapability Int64 ; 0x0000002c
+               OpCapability ImageBasic ; 0x00000034
+               OpCapability LiteralSampler ; 0x0000003c
+               OpCapability Sampled1D ; 0x00000044
+               OpCapability SampledBuffer ; 0x0000004c
+          %1 = OpExtInstImport "OpenCL.std" ; 0x00000054
+               OpMemoryModel Physical64 OpenCL ; 0x00000068
+               OpEntryPoint Kernel %11 "images" ; 0x00000074
+               OpEntryPoint Kernel %19 "scale_image" ; 0x00000088
+               OpEntryPoint Kernel %47 "flip_channels" ; 0x000000a0
+         %70 = OpString "kernel_arg_type.images.image2d_t,image1d_buffer_t,image1d_array_t," ; 0x000000bc
+         %71 = OpString "kernel_arg_type.scale_image.image2d_t,image2d_t,float," ; 0x00000108
+         %72 = OpString "kernel_arg_type.flip_channels.image2d_t,image2d_t," ; 0x00000148
+               OpSource OpenCL_C 102000 ; 0x00000184
+               OpName %5 "__spirv_BuiltInGlobalInvocationId" ; 0x00000190
+               OpName %12 "i2d" ; 0x000001bc
+               OpName %13 "i1db" ; 0x000001c8
+               OpName %14 "i1da" ; 0x000001d8
+               OpName %15 "entry" ; 0x000001e8
+               OpName %20 "output" ; 0x000001f8
+               OpName %21 "input" ; 0x00000208
+               OpName %22 "factor" ; 0x00000218
+               OpName %23 "entry" ; 0x00000228
+               OpName %25 "call" ; 0x00000238
+               OpName %27 "conv" ; 0x00000248
+               OpName %30 "vecinit" ; 0x00000258
+               OpName %32 "call1" ; 0x00000268
+               OpName %33 "conv2" ; 0x00000278
+               OpName %34 "vecinit3" ; 0x00000288
+               OpName %38 "TempSampledImage" ; 0x0000029c
+               OpName %40 "call4.old" ; 0x000002b8
+               OpName %43 "splat.splatinsert" ; 0x000002cc
+               OpName %44 "splat.splat" ; 0x000002e8
+               OpName %45 "mul" ; 0x000002fc
+               OpName %48 "output" ; 0x00000308
+               OpName %49 "input" ; 0x00000318
+               OpName %50 "entry" ; 0x00000328
+               OpName %52 "call" ; 0x00000338
+               OpName %53 "conv" ; 0x00000348
+               OpName %54 "vecinit" ; 0x00000358
+               OpName %56 "call1" ; 0x00000368
+               OpName %57 "conv2" ; 0x00000378
+               OpName %58 "vecinit3" ; 0x00000388
+               OpName %60 "TempSampledImage" ; 0x0000039c
+               OpName %61 "call4.old" ; 0x000003b8
+               OpName %63 "vecinit5" ; 0x000003cc
+               OpName %65 "vecinit6" ; 0x000003e0
+               OpName %67 "vecinit7" ; 0x000003f4
+               OpName %69 "vecinit8" ; 0x00000408
+               OpDecorate %5 BuiltIn GlobalInvocationId ; 0x0000041c
+               OpDecorate %5 Constant ; 0x0000042c
+               OpDecorate %5 LinkageAttributes "__spirv_BuiltInGlobalInvocationId" Import ; 0x00000438
+          %2 = OpTypeInt 64 0 ; 0x0000046c
+         %26 = OpTypeInt 32 0 ; 0x0000047c
+          %3 = OpTypeVector %2 3 ; 0x0000048c
+          %4 = OpTypePointer UniformConstant %3 ; 0x0000049c
+          %6 = OpTypeVoid ; 0x000004ac
+          %7 = OpTypeImage %6 2D 0 0 0 0 Unknown ReadOnly ; 0x000004b4
+          %8 = OpTypeImage %6 Buffer 0 0 0 0 Unknown WriteOnly ; 0x000004dc
+          %9 = OpTypeImage %6 1D 0 1 0 0 Unknown ReadOnly ; 0x00000504
+         %10 = OpTypeFunction %6 %7 %8 %9 ; 0x0000052c
+         %16 = OpTypeImage %6 2D 0 0 0 0 Unknown WriteOnly ; 0x00000544
+         %17 = OpTypeFloat 32 ; 0x0000056c
+         %18 = OpTypeFunction %6 %16 %7 %17 ; 0x00000578
+         %28 = OpTypeVector %26 2 ; 0x00000590
+         %35 = OpTypeSampler ; 0x000005a0
+         %37 = OpTypeSampledImage %7 ; 0x000005a8
+         %39 = OpTypeVector %17 4 ; 0x000005b4
+         %46 = OpTypeFunction %6 %16 %7 ; 0x000005c4
+          %5 = OpVariable %4 UniformConstant ; 0x000005d8
+         %29 = OpUndef %28 ; 0x000005e8
+         %36 = OpConstantSampler %35 ClampToEdge 0 Nearest ; 0x000005f4
+         %41 = OpConstant %17 0 ; 0x0000060c
+         %42 = OpUndef %39 ; 0x0000061c
+         %59 = OpConstantSampler %35 ClampToEdge 0 Nearest ; 0x00000628
+         %11 = OpFunction %6 None %10 ; 0x00000640
+         %12 = OpFunctionParameter %7 ; 0x00000654
+         %13 = OpFunctionParameter %8 ; 0x00000660
+         %14 = OpFunctionParameter %9 ; 0x0000066c
+         %15 = OpLabel ; 0x00000678
+               OpReturn ; 0x00000680
+               OpFunctionEnd ; 0x00000684
+         %19 = OpFunction %6 None %18 ; 0x00000688
+         %20 = OpFunctionParameter %16 ; 0x0000069c
+         %21 = OpFunctionParameter %7 ; 0x000006a8
+         %22 = OpFunctionParameter %17 ; 0x000006b4
+         %23 = OpLabel ; 0x000006c0
+         %24 = OpLoad %3 %5 ; 0x000006c8
+         %25 = OpCompositeExtract %2 %24 0 ; 0x000006d8
+         %27 = OpUConvert %26 %25 ; 0x000006ec
+         %30 = OpCompositeInsert %28 %27 %29 0 ; 0x000006fc
+         %31 = OpLoad %3 %5 ; 0x00000714
+         %32 = OpCompositeExtract %2 %31 1 ; 0x00000724
+         %33 = OpUConvert %26 %32 ; 0x00000738
+         %34 = OpCompositeInsert %28 %33 %30 1 ; 0x00000748
+         %38 = OpSampledImage %37 %21 %36 ; 0x00000760
+         %40 = OpImageSampleExplicitLod %39 %38 %34 Lod %41 ; 0x00000774
+         %43 = OpCompositeInsert %39 %22 %42 0 ; 0x00000790
+         %44 = OpVectorShuffle %39 %43 %42 0 0 0 0 ; 0x000007a8
+         %45 = OpFMul %39 %44 %40 ; 0x000007cc
+               OpImageWrite %20 %34 %45 ; 0x000007e0
+               OpReturn ; 0x000007f0
+               OpFunctionEnd ; 0x000007f4
+         %47 = OpFunction %6 None %46 ; 0x000007f8
+         %48 = OpFunctionParameter %16 ; 0x0000080c
+         %49 = OpFunctionParameter %7 ; 0x00000818
+         %50 = OpLabel ; 0x00000824
+         %51 = OpLoad %3 %5 ; 0x0000082c
+         %52 = OpCompositeExtract %2 %51 0 ; 0x0000083c
+         %53 = OpUConvert %26 %52 ; 0x00000850
+         %54 = OpCompositeInsert %28 %53 %29 0 ; 0x00000860
+         %55 = OpLoad %3 %5 ; 0x00000878
+         %56 = OpCompositeExtract %2 %55 1 ; 0x00000888
+         %57 = OpUConvert %26 %56 ; 0x0000089c
+         %58 = OpCompositeInsert %28 %57 %54 1 ; 0x000008ac
+         %60 = OpSampledImage %37 %49 %59 ; 0x000008c4
+         %61 = OpImageSampleExplicitLod %39 %60 %58 Lod %41 ; 0x000008d8
+         %62 = OpCompositeExtract %17 %61 2 ; 0x000008f4
+         %63 = OpCompositeInsert %39 %62 %42 0 ; 0x00000908
+         %64 = OpCompositeExtract %17 %61 1 ; 0x00000920
+         %65 = OpCompositeInsert %39 %64 %63 1 ; 0x00000934
+         %66 = OpCompositeExtract %17 %61 0 ; 0x0000094c
+         %67 = OpCompositeInsert %39 %66 %65 2 ; 0x00000960
+         %68 = OpCompositeExtract %17 %61 3 ; 0x00000978
+         %69 = OpCompositeInsert %39 %68 %67 3 ; 0x0000098c
+               OpImageWrite %48 %58 %69 ; 0x000009a4
+               OpReturn ; 0x000009b4
+               OpFunctionEnd ; 0x000009b8
